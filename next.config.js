@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domain: ["https://jsonplaceholder.typicode.com"],
+    domain: ["localhost:4000/photos", "via.placeholder.com"],
   },
 };
 

@@ -20,13 +20,33 @@ export default function Home() {
       </Head>
 
       <h1 className={styles.title}>Homepage</h1>
-      <Link href={"/product"}>
-        <a>Product</a>
-      </Link>
-      <Link href={"/photo"}>
-        <a>Photos</a>
-      </Link>
-      <button onClick={handleClick}></button>
+      <li>
+        <Link href={"/photos-ssg"}>
+          <a>Photos (Static Site Generation)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href={"/photos-ssr"}>
+          <a>Photos (Server Side Regeneration)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href={"/photos-isr"}>
+          <a>Photos (Incremental Site Regeneration)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href={"/photos-on-demand-isr"}>
+          <a>Photos (On Demand Incremental Site Regeneration)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href={"/photos-csr"}>
+          <a>Photos (Client Side Regeneration)</a>
+        </Link>
+      </li>
+
+      {/* <button onClick={handleClick}></button> */}
     </div>
   );
 }
