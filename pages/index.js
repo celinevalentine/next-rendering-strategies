@@ -6,11 +6,6 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
-  const handleClick = () => {
-    console.log("order placed");
-    router.push("/product");
-  };
-
   return (
     <div className={styles.container}>
       <Head>
@@ -22,31 +17,34 @@ export default function Home() {
       <h1 className={styles.title}>Homepage</h1>
       <li>
         <Link href={"/photos-ssg"}>
-          <a>Photos (Static Site Generation)</a>
+          <a>Static Site Generation</a>
         </Link>
       </li>
       <li>
         <Link href={"/photos-ssr"}>
-          <a>Photos (Server Side Regeneration)</a>
+          <a>Server Side Regeneration</a>
         </Link>
       </li>
       <li>
         <Link href={"/photos-isr"}>
-          <a>Photos (Incremental Site Regeneration)</a>
+          <a>Incremental Site Regeneration</a>
         </Link>
       </li>
       <li>
         <Link href={"/photos-on-demand-isr"}>
-          <a>Photos (On Demand Incremental Site Regeneration)</a>
+          <a>On Demand Incremental Site Regeneration</a>
         </Link>
       </li>
       <li>
         <Link href={"/photos-csr"}>
-          <a>Photos (Client Side Regeneration)</a>
+          <a>Client Side Regeneration</a>
         </Link>
       </li>
-
-      {/* <button onClick={handleClick}></button> */}
+      <li>
+        <Link href={"/photos-swr"}>
+          <a>Client Side Regeneration-SWR</a>
+        </Link>
+      </li>
     </div>
   );
 }

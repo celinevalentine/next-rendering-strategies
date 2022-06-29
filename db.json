@@ -5,6 +5,7 @@
     "title": "voluptate voluptas molestias vitae illo iusto-csr-update",
     "url": "https://via.placeholder.com/600/88b703",
     "album": "family"
+
   },
   {
  
@@ -21,5 +22,13 @@
     "album": "work"
 
   }
-    ]
+    ],
+  "dashboard": [
+    {
+        "posts": 20,
+        "likes": 40,
+        "followers": 140,
+        "followed": 200    
+      }
+  ]
 }

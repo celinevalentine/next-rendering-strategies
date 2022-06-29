@@ -16,11 +16,14 @@ const Photos = ({ photos }) => {
       <li>Similar to SSG that pre-renders HTML + JSON but at request time</li>
       <li>Every page can be served updated data with user specific content</li>
       <h2>Cons</h2>
-      <li></li>
+      <li>Bad SEO</li>
+      <li>
+        No pre-rendering, might takes long time for users to see the pages
+      </li>
       <h2>Use cases</h2>
       <li>
-        social media or ecommerce sites where dynamic and personalized content
-        with SEO is important
+        personalized private data such as dashboard page whereas SEO is not
+        important
       </li>
 
       <hr />
