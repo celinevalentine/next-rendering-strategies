@@ -13,7 +13,7 @@ import useSwr from "swr";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 const Dashboard = () => {
   const router = useRouter();
-  const { data, error } = useSwr("http://localhost:4000/dashboard", fetcher);
+  const { data, error } = useSwr("http://localhost:3000/api/db", fetcher);
   console.log("swr-data", data);
   console.log(error);
   if (error) return "error occured";
