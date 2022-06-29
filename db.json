@@ -23,12 +23,11 @@
 
   }
     ],
-  "dashboard": [
+  "dashboard": 
     {
         "posts": 20,
         "likes": 40,
         "followers": 140,
         "followed": 200    
       }
-  ]
 }

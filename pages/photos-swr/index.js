@@ -3,16 +3,19 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useSwr from "swr";
 
-const Dashboard = () => {
-  const fetcher = async () => {
-    const response = await fetch(`http://localhost:4000/dashboard`);
-    const data = await response.json();
-    console.log("swr-data", data);
-    return data;
-  };
-  const router = useRouter();
-  const { data, error } = useSwr("photos", fetcher);
+// const fetcher = async () => {
+//   const response = await fetch(`http://localhost:4000/dashboard`);
+//   const data = await response.json();
+//
+//   return data;
+// };
 
+const fetcher = (url) => fetch(url).then((r) => r.json());
+const Dashboard = () => {
+  const router = useRouter();
+  const { data, error } = useSwr("http://localhost:4000/dashboard", fetcher);
+  console.log("swr-data", data);
+  console.log(error);
   if (error) return "error occured";
   if (!data) return "loading...";
 
@@ -47,7 +50,7 @@ const Dashboard = () => {
       <hr />
       <h1>My Dashboard</h1>
       <div>
-        <p>posts: {data.dashboard}</p>
+        <p>posts: {data.posts}</p>
         <p>likes:{data.likes}</p>
         <p>followers: {data.followers}</p>
         <p>followed: {data.followed}</p>
