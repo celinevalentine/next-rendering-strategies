@@ -32,22 +32,14 @@ const Photos = ({ photos }) => {
       {photos.map((photo) => {
         return (
           <>
-            <a>
-              photo#:{photo.id} | album: {photo.album}
-            </a>
-            {/* todo: fix album not defined 
-            <Link href={`/photos-ssr/${album}`}> */}
+            <Link href={`/photos-ssr/${photo.album}`}>
+              <a>
+                photo#:{photo.id} | album: {photo.album}
+              </a>
+            </Link>
             <p>title: {photo.title}</p>
-            {/* </Link> */}
 
             <br />
-            {/* <Image
-              alt={photo.title}
-              src={photo.url}
-              width={500}
-              height={500}
-              layout="fill"
-            /> */}
           </>
         );
       })}
@@ -58,9 +50,9 @@ const Photos = ({ photos }) => {
 export default Photos;
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:4000/photos");
+  const response = await fetch("http://localhost:3000/api/photos");
   const data = await response.json();
-  console.log(data);
+
   return {
     props: {
       photos: data,

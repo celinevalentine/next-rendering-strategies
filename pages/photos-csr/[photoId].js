@@ -1,61 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
-const PhotoDetail = ({ photo }) => {
+const PhotoDetail = () => {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <h1>loading...</h1>;
+  const { photoId } = router.query;
+  console.log("router", router);
+  const [photos, setPhotos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:3000/api/photos");
+      const data = await response.json();
+      console.log("data-csr", data);
+      setPhotos(data);
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
+  if (isLoading) {
+    return <h2>loading...</h2>;
   }
+
   return (
     <>
       <Link href={"/"}>
         <a>Back to Home</a>
       </Link>
-      <div>Photo Detail of Photo #{photo.id}</div>
-
-      <p>title: {photo.title}</p>
-      <p>url: {photo.url}</p>
-      {/* <Image src={photo.url} alt={photo.title} /> */}
+      {photos
+        .filter((photo) => {
+          console.log("photo", photo, "photoID", photoId);
+          return Number(photoId) === photo.id;
+        })
+        .map((photo) => {
+          return (
+            <>
+              <div>Photo Detail of Photo #{photo.id}</div>
+              <p>title: {photo.title}</p>
+              <p>url: {photo.url}</p>
+            </>
+          );
+        })}
     </>
   );
 };
 
 export default PhotoDetail;
-
-export async function getStaticPaths() {
-  const response = await fetch(`http://localhost:4000/photos`);
-  const data = await response.json();
-  const paths = data.slice(0, 10).map((photo) => {
-    return {
-      params: {
-        photoId: `${photo.id}`,
-      },
-    };
-  });
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context) {
-  const { params } = context;
-  const response = await fetch(
-    `http://localhost:4000/photos/${params.photoId}`
-  );
-  const data = await response.json();
-
-  if (!data.id) {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: {
-      photo: data,
-    },
-  };
-}

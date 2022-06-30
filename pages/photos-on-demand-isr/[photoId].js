@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const PhotoDetail = ({ photo }) => {
   const router = useRouter();
+  console.log("phototop", photo);
 
   if (router.isFallback) {
     return <h1>loading...</h1>;
@@ -25,36 +26,35 @@ const PhotoDetail = ({ photo }) => {
 export default PhotoDetail;
 
 export async function getStaticPaths() {
-  const response = await fetch(`http://localhost:4000/photos`);
+  const response = await fetch(`http://localhost:3000/api/photos`);
   const data = await response.json();
-  const paths = data.slice(0, 10).map((photo) => {
+  const paths = data.map((photo) => {
     return {
       params: {
         photoId: `${photo.id}`,
       },
     };
   });
+  console.log("paths", paths);
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
 export async function getStaticProps(context) {
+  console.log("hi");
   const { params } = context;
-  const response = await fetch(
-    `http://localhost:4000/photos/${params.photoId}`
-  );
+  const response = await fetch(`http://localhost:3000/api/photos`);
   const data = await response.json();
-
-  if (!data.id) {
-    return {
-      notFound: true,
-    };
-  }
+  const photoId = params.photoId;
+  const photo = data.filter((photo) => {
+    return Number(photoId) === photo.id;
+  });
+  console.log("photo", photo);
   return {
     props: {
-      photo: data,
+      photo: photo[0],
     },
   };
 }

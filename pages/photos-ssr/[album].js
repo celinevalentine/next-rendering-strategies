@@ -33,19 +33,25 @@ export default PhotoDetailByAlbumn;
 export async function getServerSideProps(context) {
   const { params } = context;
   const { album } = params;
-  // const response = await fetch(`http:/localhost:4000/photos/${params.photoId}`);
-  const response = await fetch(`http://localhost:4000/photos?album=${album}`);
-  const data = await response.json();
-  console.log(data);
 
+  const response = await fetch(`http://localhost:3000/api/photos`);
+
+  const data = await response.json();
+  console.log("data", data);
   // if (!data.id) {
   //   return {
   //     notFound: true,
   //   };
   // }
+  const photo = data.filter((photo) => {
+    if (photo.album === album) {
+      return photo;
+    }
+  });
+  console.log("filter photo", photo);
   return {
     props: {
-      photos: data,
+      photos: photo,
       album,
     },
   };

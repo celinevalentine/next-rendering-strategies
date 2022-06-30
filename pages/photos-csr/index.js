@@ -8,8 +8,9 @@ const Photos = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      const response = await fetch("http://localhost:4000/photos");
+      const response = await fetch("http://localhost:3000/api/photos");
       const data = await response.json();
+      console.log("data-csr", data);
       setPhotos(data);
       setIsLoading(false);
     };
