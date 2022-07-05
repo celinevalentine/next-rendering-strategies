@@ -54,7 +54,7 @@ export default Photos;
 
 export async function getStaticProps() {
   console.log("updating photo info");
-  const response = await fetch("http:localhost:3000/api/photos");
+  const response = await fetch("http:process.env.BASE_URL/api/photos");
   const data = await response.json();
   return {
     props: {

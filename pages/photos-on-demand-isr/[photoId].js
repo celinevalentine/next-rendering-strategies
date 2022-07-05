@@ -26,7 +26,9 @@ const PhotoDetail = ({ photo }) => {
 export default PhotoDetail;
 
 export async function getStaticPaths() {
-  const response = await fetch(`http://localhost:3000/api/photos`);
+  const response = await fetch(
+    `http://process.env.BASE_URL/api/photos/api/photos`
+  );
   const data = await response.json();
   const paths = data.map((photo) => {
     return {
@@ -45,7 +47,9 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   console.log("hi");
   const { params } = context;
-  const response = await fetch(`http://localhost:3000/api/photos`);
+  const response = await fetch(
+    `http://process.env.BASE_URL/api/photos/api/photos`
+  );
   const data = await response.json();
   const photoId = params.photoId;
   const photo = data.filter((photo) => {

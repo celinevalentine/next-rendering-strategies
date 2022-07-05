@@ -2,23 +2,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useSwr from "swr";
-
-// const fetcher = async () => {
-//   const response = await fetch(`http://localhost:4000/dashboard`);
-//   const data = await response.json();
-//
-//   return data;
-// };
+import { BASE_URL } from "../../constant";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 const Dashboard = () => {
   const router = useRouter();
-  const { data, error } = useSwr(
-    "http://localhost:3000/api/dashboard",
-    fetcher
-  );
-  // console.log("swr-data", data);
-  // console.log(error);
+  const { data, error } = useSwr(`${BASE_URL}/api/dashboard`, fetcher);
+  console.log("swr-data", data);
+  console.log(error);
   if (error) return "error occured";
   if (!data) return "loading...";
 

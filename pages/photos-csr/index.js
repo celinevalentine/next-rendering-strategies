@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { BASE_URL } from "../../constant";
 
 const Photos = () => {
   const [photos, setPhotos] = useState([]);
@@ -8,9 +9,8 @@ const Photos = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3000/api/photos");
+      const response = await fetch(`${BASE_URL}/api/photos`);
       const data = await response.json();
-      console.log("data-csr", data);
       setPhotos(data);
       setIsLoading(false);
     };
@@ -45,7 +45,7 @@ const Photos = () => {
       {photos.map((photo) => {
         return (
           <>
-            <Link href={`photos-csr/${photo.id}`}>
+            <Link href={`/photos-csr/${photo.id}`}>
               <p>title: {photo.title}</p>
             </Link>
             <br />

@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { database } from "../../db";
 
 const PhotoDetailByAlbumn = ({ photos, album }) => {
   const router = useRouter();
@@ -34,16 +35,7 @@ export async function getServerSideProps(context) {
   const { params } = context;
   const { album } = params;
 
-  const response = await fetch(`http://localhost:3000/api/photos`);
-
-  const data = await response.json();
-  console.log("data", data);
-  // if (!data.id) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
-  const photo = data.filter((photo) => {
+  const photo = database.photos.filter((photo) => {
     if (photo.album === album) {
       return photo;
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { database } from "../../db";
 
 const Photos = ({ photos }) => {
   return (
@@ -50,12 +51,9 @@ const Photos = ({ photos }) => {
 export default Photos;
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/photos");
-  const data = await response.json();
-
   return {
     props: {
-      photos: data,
+      photos: database.photos,
     },
   };
 }
