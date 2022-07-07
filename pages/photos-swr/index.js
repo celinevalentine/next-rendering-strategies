@@ -2,12 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useSwr from "swr";
-import { BASE_URL } from "../../constant";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 const Dashboard = () => {
   const router = useRouter();
-  const { data, error } = useSwr(`${BASE_URL}/api/dashboard`, fetcher);
+  const { data, error } = useSwr(`/api/dashboard`, fetcher);
   console.log("swr-data", data);
   console.log(error);
   if (error) return "error occured";

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import { BASE_URL } from "../../constant";
 
 const PhotoDetail = () => {
   const router = useRouter();
@@ -14,7 +13,7 @@ const PhotoDetail = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      const response = await fetch(`${BASE_URL}/api/photos`);
+      const response = await fetch(`/api/photos`);
       const data = await response.json();
       console.log("data-csr", data);
       setPhotos(data);

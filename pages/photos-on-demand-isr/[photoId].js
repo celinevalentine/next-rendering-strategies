@@ -2,10 +2,10 @@ import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { database } from "../../db";
 
 const PhotoDetail = ({ photo }) => {
   const router = useRouter();
-  console.log("phototop", photo);
 
   if (router.isFallback) {
     return <h1>loading...</h1>;
@@ -26,11 +26,7 @@ const PhotoDetail = ({ photo }) => {
 export default PhotoDetail;
 
 export async function getStaticPaths() {
-  const response = await fetch(
-    `http://process.env.BASE_URL/api/photos/api/photos`
-  );
-  const data = await response.json();
-  const paths = data.map((photo) => {
+  const paths = database.photos.map((photo) => {
     return {
       params: {
         photoId: `${photo.id}`,
@@ -45,14 +41,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  console.log("hi");
   const { params } = context;
-  const response = await fetch(
-    `http://process.env.BASE_URL/api/photos/api/photos`
-  );
-  const data = await response.json();
-  const photoId = params.photoId;
-  const photo = data.filter((photo) => {
+  const { photoId } = params;
+
+  const photo = database.photos.filter((photo) => {
     return Number(photoId) === photo.id;
   });
   console.log("photo", photo);

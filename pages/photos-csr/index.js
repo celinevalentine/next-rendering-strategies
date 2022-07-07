@@ -9,7 +9,7 @@ const Photos = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      const response = await fetch(`${BASE_URL}/api/photos`);
+      const response = await fetch(`/api/photos`);
       const data = await response.json();
       setPhotos(data);
       setIsLoading(false);

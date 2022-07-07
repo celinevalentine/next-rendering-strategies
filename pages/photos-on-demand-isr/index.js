@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Photo from "../../components/Photo";
 import Link from "next/link";
+import { database } from "../../db";
 
 const Photos = ({ photos }) => {
   return (
@@ -53,12 +54,9 @@ const Photos = ({ photos }) => {
 export default Photos;
 
 export async function getStaticProps() {
-  console.log("updating photo info");
-  const response = await fetch("http:process.env.BASE_URL/api/photos");
-  const data = await response.json();
   return {
     props: {
-      photos: data,
+      photos: database.photos,
     },
   };
 }

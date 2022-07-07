@@ -2,9 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { database } from "../../db";
 
 const PhotoDetail = ({ photo }) => {
   const router = useRouter();
+  console.log("photo", photo);
 
   if (router.isFallback) {
     return <h1>loading...</h1>;
@@ -25,11 +27,8 @@ const PhotoDetail = ({ photo }) => {
 export default PhotoDetail;
 
 export async function getStaticPaths() {
-  const response = await fetch(
-    `http://process.env.BASE_URL/api/photos/api/photos`
-  );
-  const data = await response.json();
-  const paths = data.map((photo) => {
+  const paths = database.photos.map((photo) => {
+    console.log("photo", photo);
     return {
       params: {
         photoId: `${photo.id}`,
@@ -38,25 +37,21 @@ export async function getStaticPaths() {
   });
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
 export async function getStaticProps(context) {
   const { params } = context;
-  const response = await fetch(
-    `http://process.env.BASE_URL/api/photos/api/photos/${params.photoId}`
-  );
-  const data = await response.json();
+  const { photoId } = params;
 
-  if (!data.id) {
-    return {
-      notFound: true,
-    };
-  }
+  const photo = database.photos.filter((photo) => {
+    return Number(photoId) === photo.id;
+  });
+  console.log("photo", photo);
   return {
     props: {
-      photo: data,
+      photo: photo[0],
     },
     revalidate: 50,
   };
