@@ -17,9 +17,7 @@ const Dashboard = () => {
       <Link href={"/"}>
         <a>Back to Home</a>
       </Link>
-      <h1>
-        list of photos Rendered by SWR (Server Side Regeneration) with data
-      </h1>
+      <h1>list of photos Rendered by SWR (CSR) with data</h1>
       <hr />
       <Link href={"/"}>
         <a>Back to Home</a>

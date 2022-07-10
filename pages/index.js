@@ -37,12 +37,12 @@ export default function Home() {
       </li>
       <li>
         <Link href={"/photos-csr"}>
-          <a>Client Side Regeneration</a>
+          <a>Client Side Rendering</a>
         </Link>
       </li>
       <li>
         <Link href={"/photos-swr"}>
-          <a>Client Side Regeneration-SWR</a>
+          <a>Client Side Rendering-SWR</a>
         </Link>
       </li>
     </div>
